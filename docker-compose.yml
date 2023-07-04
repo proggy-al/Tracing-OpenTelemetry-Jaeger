@@ -1,0 +1,78 @@
+version: '3.4'
+
+services:
+
+  service1:
+    image: ${DOCKER_REGISTRY-}service1
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: first-service
+    build:
+      context: .
+      dockerfile: Service1/Dockerfile
+    ports:
+      - "7771:80"
+    networks:
+      - demojaeger
+
+  service2:
+    image: ${DOCKER_REGISTRY-}service2
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: second-service
+    build:
+      context: .
+      dockerfile: Service2/Dockerfile
+    ports:
+      - "7772:80"
+    networks:
+      - demojaeger
+
+  service3:
+    image: ${DOCKER_REGISTRY-}service3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: third-service
+    build:
+      context: .
+      dockerfile: Service3/Dockerfile
+    ports:
+      - "7733:80"
+    networks:
+      - demojaeger
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: jaeger-agent
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778/tcp"
+      - "9411:9411"
+    networks:
+      - demojaeger
+
+
+networks:
+  demojaeger:
