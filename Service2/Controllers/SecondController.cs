@@ -23,10 +23,20 @@ namespace Service2.Controllers
             using (var activity = _activitySource.StartActivity("CheckSecondController"))
             {
                 activity.SetTag("secondControllerNumber", "2");
+
+                var activityEvent = new ActivityEvent("Some useful information from second service",DateTimeOffset.Now,
+                   tags: new ActivityTagsCollection { new("Here should be Key", new  { x=1,y=2,coment="anonymous object, struct like"}) });
+
                 var client = new HttpClient();
-                raw = await client.GetStringAsync("http://third-service/api/number");                
+                raw = await client.GetStringAsync("http://third-service/api/number");      
+                
+                Thread.Sleep(3000);
+
+                activity.AddEvent(activityEvent);
+
+                return $"второй {raw}";
             }
-            return $"второй {raw}";
+            
 
         }
     }

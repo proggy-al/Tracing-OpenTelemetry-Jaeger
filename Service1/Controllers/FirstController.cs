@@ -21,6 +21,12 @@ namespace Service1.Controllers
             {
                 var client = new HttpClient();
                 var raw = await client.GetStringAsync("http://second-service/api/number");
+
+                var activityEvent = new ActivityEvent("Some useful information from first service", DateTimeOffset.Now,
+                   tags: new ActivityTagsCollection { new("Here should be Key", new { x = 5, y = 9, coment = "anonymous object, struct like" }) });
+
+                newActivity.AddEvent(activityEvent);
+
                 return $"первый {raw}";
             }
             

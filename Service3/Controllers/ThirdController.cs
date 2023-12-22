@@ -23,8 +23,11 @@ namespace Service3.Controllers
                     tags: new ActivityTagsCollection { new("products.count", 3) });
 
                 act.AddEvent(activityEvent);
+
+                //Thread.Sleep(3000);
+                return $"третий";
             }
-            return $"третий";
+            
         }
     }
 }

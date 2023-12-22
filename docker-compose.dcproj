@@ -6,7 +6,7 @@
     <ProjectGuid>57efc8be-a690-41b2-8f4f-53ecd161b9b1</ProjectGuid>
     <DockerLaunchAction>None</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>service3</DockerServiceName>
+    <DockerServiceName>service1</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
